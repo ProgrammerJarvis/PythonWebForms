@@ -1,0 +1,40 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <form method="post">
+        <input type="text" name="task_description">
+        <input type="submit" value="save task">
+    </form>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>item name</th>
+            <th>completed</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        {% for record in data %}
+
+            <tr>
+                <th>{{ record[0] }}</th>
+                <th>{{ record[1] }}</th>
+                <th>{{ record[2] }}</th>
+                <th><a href="/complete/{{ record[0] }}"><input type="button" 
+value="{% if record[2]=='No' %} mark complete {% else %} mark incomplete {% endif %}"></a></th>
+                <th><a href="/delete/{{ record[0] }}"><input type="button" value="delete"></a></th>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+</body>
+</html>
