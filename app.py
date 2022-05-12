@@ -39,7 +39,6 @@ def name():
     if request.method =='POST':
         name = request.form['name']
 
-
     return render_template('name.html', name=name)
 
 
