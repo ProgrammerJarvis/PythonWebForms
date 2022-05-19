@@ -27,7 +27,7 @@ def login():
         if username =='admin' and password == '123':
             return 'logged in'
         else:
-            return 'Acces denied'
+            return 'Access denied'
 
     else:
         return render_template('login.html')
