@@ -9,7 +9,7 @@ db.execute("""CREATE TABLE IF NOT EXISTS todo_items (
     )""")
 db.commit()
 
-app = Flask(__name__, static_folder="static") #To launch web app : python -m flask run
+app = Flask(__name__, static_folder="static") #To launch web app type into terminal: python -m flask run
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
