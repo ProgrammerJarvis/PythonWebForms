@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
 db = sqlite3.connect('database.db', check_same_thread=False)
-
 db.execute("""CREATE TABLE IF NOT EXISTS todo_items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     item_name TEXT,
@@ -12,10 +11,13 @@ db.commit()
 
 app = Flask(__name__, static_folder="static") #To launch web app : python -m flask run
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    if request.method == 'POST':
+        return redirect(url_for('login'))
+    else:
+        return render_template('home.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -25,9 +27,10 @@ def login():
         password = request.form['password']
         
         if username =='admin' and password == '123':
-            return 'logged in'
+            return redirect(url_for('work'))
+            # return 'logged in'
         else:
-            return 'Access denied'
+            return 'Access denied, go back and try again :)'
 
     else:
         return render_template('login.html')
