@@ -42,7 +42,6 @@ def name():
     return render_template('name.html', name=name)
 
 
-
 @app.route('/work', methods=['GET', 'POST'])
 def work():
     if request.method == 'POST':
